@@ -1,0 +1,14 @@
+{
+  "name": "drupal/role_expire",
+  "type": "drupal-module",
+  "description": "Custom implementation of http://drupal.org/project/role_expire",
+  "keywords": ["Drupal"],
+  "license": "GPL-2.0+",
+  "homepage": "https://github.com/lucasljj/role_expire",
+  "minimum-stability": "dev",
+  "support": {
+    "issues": "https://github.com/lucasljj/role_expire/issues",
+    "source": "https://github.com/lucasljj/role_expire"
+  },
+  "require": { }
+}

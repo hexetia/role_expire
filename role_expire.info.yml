@@ -1,0 +1,8 @@
+name: Role expire API
+type: module
+description: Role expire API
+core: 8.x
+package: custom
+
+dependencies:
+  - user

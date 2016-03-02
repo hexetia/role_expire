@@ -1,0 +1,3 @@
+role_expire__manager:
+  class: \Drupal\custom_role_expire\RoleManagerService
+  arguments: ['@database']
