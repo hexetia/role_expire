@@ -5,6 +5,7 @@ namespace Drupal\role_expire;
 
 use Drupal\Core\Database\Connection;
 use Drupal\role_expire\Entity\RoleExpire;
+use Drupal\role_expire\Exception\RoleExpireNotFoundException;
 use Drupal\user\UserInterface;
 
 class RoleManagerService

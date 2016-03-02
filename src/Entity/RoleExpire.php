@@ -29,7 +29,7 @@ class RoleExpire extends ContentEntityBase
 {
     public function getUserId(): int
     {
-        return (int) $this->get('user_id')->getValue();
+        return (int) $this->get('user_id')->getValue()[0]['value'];
     }
 
     public function setUserId(int $userId): self
@@ -40,7 +40,7 @@ class RoleExpire extends ContentEntityBase
 
     public function getRoleId(): string
     {
-        return $this->get('role_id')->getValue();
+        return $this->get('role_id')->getValue()[0]['value'];
     }
 
     public function setRoleId(string $roleId): self
@@ -51,7 +51,7 @@ class RoleExpire extends ContentEntityBase
 
     public function getExpire(): int
     {
-        return (int) $this->get('expire')->getValue();
+        return (int) $this->get('expire')->getValue()[0]['value'];
     }
 
     public function setExpire(int $timestamp): self
@@ -62,12 +62,12 @@ class RoleExpire extends ContentEntityBase
 
     public function getCreatedTime(): int
     {
-        return $this->get('created')->getValue();
+        return (int) $this->get('created')->getValue()[0]['value'];
     }
 
     public function getChangedTime(): int
     {
-        return $this->get('changed')->getValue();
+        return (int) $this->get('changed')->getValue()[0]['value'];
     }
 
     public function setChangedTime(int $timestamp): self
