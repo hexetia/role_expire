@@ -4,16 +4,20 @@ declare(strict_types = 1);
 namespace Drupal\role_expire\Tests;
 
 use Drupal\role_expire\Entity\RoleExpire;
-use Drupal\simpletest\WebTestBase;
+use Drupal\simpletest\KernelTestBase;
+use Drupal\simpletest\UserCreationTrait;
 
 /**
  * @group role_expire
  */
-class RoleManagerServiceTest extends WebTestBase
+class RoleManagerServiceTest extends KernelTestBase
 {
     const ROLE_TEST_ID = 'vip';
 
-    static public $modules = ['role_expire'];
+    use UserCreationTrait {
+        createUser as drupalCreateUser;
+        createRole as drupalCreateRole;
+    }
 
     /** @var \Drupal\role_expire\RoleManagerService */
     private $roleExpireManager;
@@ -21,6 +25,11 @@ class RoleManagerServiceTest extends WebTestBase
     public function setUp()
     {
         parent::setUp();
+        /** @var \Drupal\Core\Extension\ModuleInstaller $installer */
+        $installer = $this->container->get('module_installer');
+        // the modules are only loaded, but not installed. Modules have to be installed manually, if needed.
+        $installer->install(['role_expire']);
+
         $this->roleExpireManager = \Drupal::service('role_expire__manager');
     }
 
@@ -77,7 +86,7 @@ class RoleManagerServiceTest extends WebTestBase
      */
     public function testGetExpiredRoles()
     {
-        $user = $this->createUser();
+        $user = $this->drupalCreateUser();
         $this->roleExpireManager->addTime($user, self::ROLE_TEST_ID, strtotime('07-07-2007'));
         $this->assertTrue(!empty($this->roleExpireManager->getExpiredRoles()));
     }
