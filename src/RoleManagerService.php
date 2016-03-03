@@ -22,7 +22,7 @@ class RoleManagerService
         $this->connection = $connection;
     }
 
-    public function addTime(UserInterface $user, string $roleId, int $time)
+    public function addTime(UserInterface $user, string $roleId, int $time): RoleExpire
     {
         $roleExpire = null;
 
@@ -42,6 +42,8 @@ class RoleManagerService
         $roleExpire->setExpire($roleExpire->getExpire() + $time);
         $roleExpire->save();
         $user->save();
+
+        return $roleExpire;
     }
 
     /**
@@ -69,7 +71,7 @@ class RoleManagerService
             'SELECT
               id
             FROM
-              role_expire
+              {role_expire}
             WHERE
               user_id = :userId
               AND role_id = :roleId',
@@ -95,7 +97,7 @@ class RoleManagerService
             'SELECT
               id
             FROM
-              role_expire
+              {role_expire}
             WHERE
               expire < :currentTime',
             [':currentTime' => time()]

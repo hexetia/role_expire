@@ -1,0 +1,18 @@
+<?php
+declare(strict_types = 1);
+
+use Drupal\user\Entity\User;
+
+function role_expire_cron()
+{
+    /** @var \Drupal\role_expire\RoleManagerService $roleExpireService */
+    $roleExpireService = \Drupal::service('role_expire__manager');
+    $roleExpireExpired = $roleExpireService->getExpiredRoles();
+
+    foreach ($roleExpireExpired as $expired) {
+        $user = User::load($expired->getUserId());
+        $user->removeRole($expired->getRoleId());
+        $user->save();
+        $expired->delete();
+    }
+}
