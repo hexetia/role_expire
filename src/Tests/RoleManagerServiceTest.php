@@ -33,9 +33,6 @@ class RoleManagerServiceTest extends KernelTestBase
         $this->roleExpireManager = \Drupal::service('role_expire__manager');
     }
 
-    /**
-     * @cover addTime()
-     */
     public function testAddTime()
     {
         $VIP_TIME = 666;
@@ -51,9 +48,6 @@ class RoleManagerServiceTest extends KernelTestBase
         $this->assertEqual($roleExpire->getExpire(), $VIP_TIME);
     }
 
-    /**
-     * @cover expireRole()
-     */
     public function testExpireRole()
     {
         $user = $this->drupalCreateUser();
@@ -71,9 +65,6 @@ class RoleManagerServiceTest extends KernelTestBase
         $this->assertNull(RoleExpire::load($roleExpireID));
     }
 
-    /**
-     * @cover getRoleExpire()
-     */
     public function testGetRoleExpire()
     {
         $user = $this->drupalCreateUser();
@@ -81,9 +72,6 @@ class RoleManagerServiceTest extends KernelTestBase
         $this->assertNotNull($this->roleExpireManager->getRoleExpire($user, self::ROLE_TEST_ID)->id());
     }
 
-    /**
-     * @cover getExpiredRoles()
-     */
     public function testGetExpiredRoles()
     {
         $user = $this->drupalCreateUser();
